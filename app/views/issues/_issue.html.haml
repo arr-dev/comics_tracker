@@ -1,0 +1,14 @@
+.issue
+  %p
+    Name:
+    = issue.name || issue.issue_number
+  %p
+    Store date:
+    = issue.store_date
+  %p
+    Volume:
+    = link_to issue.volume.name, volume_path(issue.volume)
+  %p= link_to 'ComicVine details', issue.site_detail_url
+  %p= issue.description.html_safe
+  %p= image_tag issue.image_url
+
