@@ -1,6 +1,6 @@
 class IssuesController < ApplicationController
   def index
-    @issues = Issue.includes(:volume).all
+    @issues = Issue.where(volume_id: params[:volume_id]).includes(:volume).all
   end
 
   def show
