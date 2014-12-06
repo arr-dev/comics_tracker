@@ -1,0 +1,6 @@
+%h1 Listing
+
+- @volumes.each do |volume|
+  .volume-name
+    Name:
+    = link_to volume.name, volume_path(volume)

@@ -1,0 +1,16 @@
+.volume
+  %p
+    Name:
+    = link_to volume.name, volume_path(volume)
+  %p
+    Start year:
+    = volume.start_year
+  %p
+    Publisher:
+    = volume.publisher_name
+  %p
+    Number of issues:
+    = volume.issues.count
+  %p= link_to 'ComicVine details', volume.site_detail_url
+  %p= image_tag volume.image_url
+
