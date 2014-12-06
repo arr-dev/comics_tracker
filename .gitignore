@@ -21,3 +21,4 @@ Session.vim
 /log/*
 !/log/.keep
 /tmp
+.env
