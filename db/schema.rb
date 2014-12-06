@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20141206155452) do
     t.datetime "updated_at"
   end
 
+  add_index "issues", ["comicvineid"], name: "index_issues_on_comicvineid"
   add_index "issues", ["volume_id"], name: "index_issues_on_volume_id"
 
   create_table "libraries", force: true do |t|
@@ -89,5 +90,7 @@ ActiveRecord::Schema.define(version: 20141206155452) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "volumes", ["comicvineid"], name: "index_volumes_on_comicvineid"
 
 end

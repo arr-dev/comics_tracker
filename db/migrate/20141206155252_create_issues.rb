@@ -1,7 +1,7 @@
 class CreateIssues < ActiveRecord::Migration
   def change
     create_table :issues do |t|
-      t.integer :comicvineid
+      t.integer :comicvineid, index: true
       t.references :volume, index: true
       t.string :name
       t.string :issue_number

@@ -4,9 +4,11 @@ class Issue < ActiveRecord::Base
   enum status: [ :active, :archived ]
 
   def self.create_from_api(results)
+    volume = Volume.find_by_comicvineid(results['volume']['id'])
+
     create!(
       comicvineid: results['id'],
-      volume_id: results['volume']['id'],
+      volume: volume,
       name: results['name'],
       issue_number: results['issue_number'],
       store_date: results['store_date'],

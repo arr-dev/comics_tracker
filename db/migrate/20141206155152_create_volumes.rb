@@ -1,7 +1,7 @@
 class CreateVolumes < ActiveRecord::Migration
   def change
     create_table :volumes do |t|
-      t.integer :comicvineid
+      t.integer :comicvineid, index: true
       t.string :name
       t.integer :start_year
       t.string :api_detail_url
