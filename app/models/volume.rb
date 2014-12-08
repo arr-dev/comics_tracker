@@ -1,5 +1,6 @@
 class Volume < ActiveRecord::Base
   has_many :issues
+  has_many :libraries
 
   enum status: [ :active, :archived ]
 

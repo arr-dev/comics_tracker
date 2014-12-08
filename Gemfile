@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'rollbar', '~> 1.2.11'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
@@ -51,5 +53,8 @@ group :development, :test do
 
   gem 'pry'
   gem 'pry-rails'
+
+  gem 'quiet_assets'
+  gem 'bullet'
 end
 
