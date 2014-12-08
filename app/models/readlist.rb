@@ -18,4 +18,6 @@
 class Readlist < ActiveRecord::Base
   belongs_to :issue
   belongs_to :user
+
+  validates :issue, :user, presence: true
 end

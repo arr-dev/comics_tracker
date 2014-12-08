@@ -26,6 +26,8 @@
 class Issue < ActiveRecord::Base
   belongs_to :volume
 
+  validates :comicvineid, :volume, :issue_number, :store_date, :image_url, presence: true
+
   enum status: [ :active, :archived ]
 
   def self.create_from_api(results)

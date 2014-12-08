@@ -24,6 +24,8 @@ class Volume < ActiveRecord::Base
   has_many :issues
   has_many :libraries
 
+  validates :comicvineid, :name, :start_year, :image_url, :publisher_name, presence: true
+
   enum status: [ :active, :archived ]
 
   def self.create_from_api(results)

@@ -19,5 +19,7 @@ class Library < ActiveRecord::Base
   belongs_to :user
   belongs_to :volume
 
+  validates :user, :volume, presence: true
+
   enum status: [ :active, :archived ]
 end
