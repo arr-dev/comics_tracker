@@ -5,6 +5,6 @@
     Name:
     = link_to volume.name, volume_path(volume)
     %div{id: "add-volume-#{volume.id}"}
-      = button_to 'Add to My Library', libraries_path(volume: volume.id), remote: true unless current_user.has_volume?(volume)
+      = button_to 'Add to My Library', libraries_path(volume: volume.id) unless current_user.has_volume?(volume)
     %div{id: "remove-volume-#{volume.id}"}
-      = button_to 'Remove from My Library', libraries_path(volume: volume.id), method: :delete, remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' } if current_user.has_volume?(volume)
+      = button_to 'Remove from My Library', libraries_path(volume: volume.id), method: :delete, data: { confirm: 'Are you sure?', disable_with: 'loading...' } if current_user.has_volume?(volume)

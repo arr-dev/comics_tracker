@@ -9,20 +9,15 @@ class LibrariesController < ApplicationController
 
   def create
     @library = current_user.libraries.create!(volume_id: params[:volume])
-    respond_to do |format|
-      format.html
-      format.js { redirect_to library_path }
-    end
+
+    redirect_to library_path
   end
 
   def destroy
     @library = current_user.libraries.where(volume_id: params[:volume])
     current_user.libraries.destroy(@library)
 
-    respond_to do |format|
-      format.html
-      format.js { redirect_to library_path }
-    end
+    redirect_to library_path
   end
 
   def current_user
