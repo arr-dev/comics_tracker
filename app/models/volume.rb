@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: volumes
+#
+#  id              :integer          not null, primary key
+#  comicvineid     :integer
+#  name            :string
+#  start_year      :integer
+#  api_detail_url  :string
+#  site_detail_url :string
+#  image_url       :string
+#  publisher_name  :string
+#  description     :text
+#  status          :integer          default("0")
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+# Indexes
+#
+#  index_volumes_on_comicvineid  (comicvineid)
+#
+
 class Volume < ActiveRecord::Base
   has_many :issues
   has_many :libraries

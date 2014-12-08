@@ -56,5 +56,7 @@ group :development, :test do
 
   gem 'quiet_assets'
   gem 'bullet'
+
+  gem 'annotate', '~> 2.6.5'
 end
 

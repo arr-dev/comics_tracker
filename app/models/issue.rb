@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: issues
+#
+#  id              :integer          not null, primary key
+#  comicvineid     :integer
+#  volume_id       :integer
+#  name            :string
+#  issue_number    :string
+#  store_date      :date
+#  cover_date      :date
+#  api_detail_url  :string
+#  site_detail_url :string
+#  image_url       :string
+#  description     :text
+#  status          :integer          default("0")
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+# Indexes
+#
+#  index_issues_on_comicvineid  (comicvineid)
+#  index_issues_on_volume_id    (volume_id)
+#
+
 class Issue < ActiveRecord::Base
   belongs_to :volume
 
