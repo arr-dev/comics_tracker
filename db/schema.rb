@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206155452) do
+ActiveRecord::Schema.define(version: 20141222163701) do
 
   create_table "issues", force: true do |t|
     t.integer  "comicvineid"
     t.integer  "volume_id"
     t.string   "name"
-    t.string   "issue_number"
+    t.integer  "issue_number"
     t.date     "store_date"
     t.date     "cover_date"
     t.string   "api_detail_url"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20141206155452) do
   end
 
   add_index "issues", ["comicvineid"], name: "index_issues_on_comicvineid"
+  add_index "issues", ["issue_number"], name: "index_issues_on_issue_number"
   add_index "issues", ["volume_id"], name: "index_issues_on_volume_id"
 
   create_table "libraries", force: true do |t|

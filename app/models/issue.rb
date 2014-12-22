@@ -6,7 +6,7 @@
 #  comicvineid     :integer
 #  volume_id       :integer
 #  name            :string
-#  issue_number    :string
+#  issue_number    :integer
 #  store_date      :date
 #  cover_date      :date
 #  api_detail_url  :string
@@ -19,8 +19,9 @@
 #
 # Indexes
 #
-#  index_issues_on_comicvineid  (comicvineid)
-#  index_issues_on_volume_id    (volume_id)
+#  index_issues_on_comicvineid   (comicvineid)
+#  index_issues_on_issue_number  (issue_number)
+#  index_issues_on_volume_id     (volume_id)
 #
 
 class Issue < ActiveRecord::Base
@@ -33,6 +34,7 @@ class Issue < ActiveRecord::Base
   def self.create_from_api(results)
     volume = Volume.find_by_comicvineid(results['volume']['id'])
 
+    raise "Issue number is: #{results['issue_number']} #{results['issue_number'].class}" if results['issue_number'].to_i.to_s != results['issue_number']
     create!(
       comicvineid: results['id'],
       volume: volume,
