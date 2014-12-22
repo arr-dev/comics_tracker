@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   end
 
   get 'my_library', to: 'libraries#show', as: :library
+  get 'my_library/unread', to: 'libraries#unread', as: :unread_library
   resource :libraries, only: [:create, :destroy]
 
   resource :readlists, only: [:create, :destroy]

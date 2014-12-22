@@ -7,6 +7,12 @@ class LibrariesController < ApplicationController
     @volumes = current_user.volumes.includes(:issues)
   end
 
+  def unread
+    @volumes = current_user.volumes.includes(:issues).select {|v| !current_user.read_issue?(v.issues.first) }
+
+    render action: 'show'
+  end
+
   def create
     @library = current_user.libraries.create!(volume_id: library_params)
 
