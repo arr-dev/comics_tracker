@@ -1,6 +1,3 @@
 %h1 Listing
 
-- @issues.each do |issue|
-  .issue-name
-    Name:
-    = link_to "#{issue.volume.name} - #{(issue.name || issue.issue_number)}", volume_issue_path(issue.volume, issue)
+= render partial: 'issues/issue_item', collection: @issues, as: :issue

@@ -1,0 +1,11 @@
+%ul.volumes.list-group
+- @volumes.each do |volume|
+  %li.volume.list-group-item.list-group-item-info
+    Name:
+    = link_to volume.name, volume_path(volume)
+    %div{id: "add-volume-#{volume.id}"}
+      = button_to 'Add to My Library', libraries_path(volume: volume.id) unless current_user.has_volume?(volume)
+    %div{id: "remove-volume-#{volume.id}"}
+      = button_to 'Remove from My Library', libraries_path(volume: volume.id), method: :delete, data: { confirm: 'Are you sure?', disable_with: 'loading...' } if current_user.has_volume?(volume)
+      %ul.issues.list-group
+      = render partial: 'issues/issue_item', collection: volume.issues, as: :issue if with_issues

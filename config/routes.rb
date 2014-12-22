@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   get 'my_library', to: 'libraries#show', as: :library
   resource :libraries, only: [:create, :destroy]
 
+  resource :readlists, only: [:create, :destroy]
+
   devise_for :users
 
   root 'libraries#show'

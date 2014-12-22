@@ -43,4 +43,8 @@ class User < ActiveRecord::Base
   def has_volume?(volume)
     volumes.include?(volume)
   end
+
+  def read_issue?(issue)
+    readlists.exists?(issue: issue, read: true)
+  end
 end

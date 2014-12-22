@@ -25,6 +25,8 @@
 #
 
 class Issue < ActiveRecord::Base
+  default_scope -> { order(issue_number: :desc)}
+
   belongs_to :volume
 
   validates :comicvineid, :volume, :issue_number, :store_date, :image_url, presence: true

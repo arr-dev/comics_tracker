@@ -1,0 +1,7 @@
+%li.issue.list-group-item{class: "#{current_user.read_issue?(issue) ? "list-group-item-success" : ""}"}
+  Name:
+  = link_to "#{issue.volume.name} - #{(issue.name || issue.issue_number)}", volume_issue_path(issue.volume, issue)
+  %div{id: "add-issue-#{issue.id}"}
+    = button_to 'Mark read', readlists_path(issue: issue.id) unless current_user.read_issue?(issue)
+  %div{id: "remove-issue-#{issue.id}"}
+    = button_to 'Mark unread', readlists_path(issue: issue.id), method: :delete, data: { confirm: 'Are you sure?', disable_with: 'loading...' } if current_user.read_issue?(issue)

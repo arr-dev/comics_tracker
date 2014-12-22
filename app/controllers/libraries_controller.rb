@@ -4,17 +4,17 @@ class LibrariesController < ApplicationController
   # GET /libraries/1
   # GET /libraries/1.json
   def show
-    @volumes = current_user.volumes
+    @volumes = current_user.volumes.includes(:issues)
   end
 
   def create
-    @library = current_user.libraries.create!(volume_id: params[:volume])
+    @library = current_user.libraries.create!(volume_id: library_params)
 
     redirect_to library_path
   end
 
   def destroy
-    @library = current_user.libraries.where(volume_id: params[:volume])
+    @library = current_user.libraries.where(volume_id: library_params)
     current_user.libraries.destroy(@library)
 
     redirect_to library_path
@@ -27,6 +27,6 @@ class LibrariesController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_params
-      params[:library]
+      params.require(:volume)
     end
 end

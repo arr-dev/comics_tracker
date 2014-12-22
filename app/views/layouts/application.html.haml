@@ -9,4 +9,4 @@
     = link_to 'My Library', library_path
     = link_to 'All volumes', volumes_path
     = yield
-    = console if Rails.env.development?
+    = console if Rails.env.development? && params[:console]
