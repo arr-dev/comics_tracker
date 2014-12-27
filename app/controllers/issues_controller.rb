@@ -6,4 +6,8 @@ class IssuesController < ApplicationController
   def show
     @issue = Issue.includes(:volume).find(params[:id])
   end
+
+  def current_user
+    @current_user ||= User.where(id: super.id).includes(:issues).first
+  end
 end

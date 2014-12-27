@@ -8,4 +8,5 @@
     %div{id: "remove-volume-#{volume.id}"}
       = button_to 'Remove from My Library', libraries_path(volume: volume.id), method: :delete, data: { confirm: 'Are you sure?', disable_with: 'loading...' } if current_user.has_volume?(volume)
       %ul.issues.list-group
-      = render partial: 'issues/issue_item', collection: volume.issues, as: :issue if with_issues
+        -# TODO: collection is prety bad
+        = render partial: 'issues/issue_item', collection: (@issues && @issues.select { |i| i.volume_id == volume.id } || volume.issues), as: :issue if with_issues

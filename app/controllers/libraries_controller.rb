@@ -8,31 +8,31 @@ class LibrariesController < ApplicationController
   end
 
   def unread
-    @volumes = current_user.volumes.includes(:issues).select {|v| !current_user.read_issue?(v.issues.first) }
+    @issues = Issue.unread(current_user).includes(:volume)
+    @volumes = Volume.where(id: @issues.map(&:volume_id).uniq)
 
     render action: 'show'
   end
 
   def create
-    @library = current_user.libraries.create!(volume_id: library_params)
+    @library = current_user.libraries.create!(volume_id: library_params[:volume])
 
     redirect_to library_path
   end
 
   def destroy
-    @library = current_user.libraries.where(volume_id: library_params)
-    current_user.libraries.destroy(@library)
+    current_user.libraries.where(volume_id: library_params[:volume]).destroy_all
 
     redirect_to library_path
   end
 
   def current_user
-    @current_user ||= User.where(id: super.id).includes(:volumes).first
+    @current_user ||= User.where(id: super.id).includes(:issues, :volumes).first
   end
 
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_params
-      params.require(:volume)
+      params.permit(:volume)
     end
 end

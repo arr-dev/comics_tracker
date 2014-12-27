@@ -44,7 +44,8 @@ class User < ActiveRecord::Base
     volumes.include?(volume)
   end
 
+  # TODO: `read: true` check missing
   def read_issue?(issue)
-    readlists.exists?(issue: issue, read: true)
+    issues.include?(issue)
   end
 end

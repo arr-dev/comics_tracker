@@ -35,6 +35,19 @@ class Issue < ActiveRecord::Base
 
   enum status: [ :active, :archived ]
 
+  def self.unread(user)
+    lib_table = Library.arel_table
+
+    conditions =
+      arel_table[:issue_number]
+        .gt(lib_table[:last_read])
+        .or(lib_table[:last_read].eq(nil))
+        .and(lib_table[:user_id].eq(user.id))
+
+    where(conditions)
+      .joins(volume: :libraries)
+  end
+
   def self.create_from_api(results)
     volume = Volume.find_by_comicvineid(results['volume']['id'])
 

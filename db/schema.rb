@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222163701) do
+ActiveRecord::Schema.define(version: 20141227172500) do
 
   create_table "issues", force: true do |t|
     t.integer  "comicvineid"
@@ -39,8 +39,10 @@ ActiveRecord::Schema.define(version: 20141222163701) do
     t.integer  "status",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "last_read"
   end
 
+  add_index "libraries", ["last_read"], name: "index_libraries_on_last_read"
   add_index "libraries", ["user_id"], name: "index_libraries_on_user_id"
   add_index "libraries", ["volume_id"], name: "index_libraries_on_volume_id"
 
