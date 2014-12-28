@@ -15,6 +15,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'autoprefixer-rails'
 
+gem 'pg'
+
 gem 'haml-rails'
 
 gem 'devise'
@@ -33,14 +35,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rollbar', '~> 1.2.11'
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
   gem 'unicorn'
 end
 
 group :development, :test do
-  gem 'sqlite3'
-
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

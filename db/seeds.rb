@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.create!(email: 'n.p@g.com', password: '12345678') do |u|
+  u.confirm!
+end
+
+[46568, 68344, 77575].each do |volume|
+  Fetch::Volume.new(volume).call
+end
