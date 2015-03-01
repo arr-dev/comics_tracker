@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/LineLength
 # == Route Map
 #
 #                   Prefix Verb   URI Pattern                              Controller#Action
@@ -28,19 +29,20 @@
 #                          GET    /users/confirmation(.:format)            devise/confirmations#show
 #                     root GET    /                                        libraries#show
 #
+# rubocop:enable Metrics/LineLength
 
 Rails.application.routes.draw do
   resources :volumes, only: [:index, :show] do
     resources :issues, only: [:index, :show]
   end
 
-  get 'my_library', to: 'libraries#show', as: :library
-  get 'my_library/unread', to: 'libraries#unread', as: :unread_library
+  get "my_library", to: "libraries#show", as: :library
+  get "my_library/unread", to: "libraries#unread", as: :unread_library
   resource :libraries, only: [:create, :destroy]
 
   resource :readlists, only: [:create, :destroy]
 
   devise_for :users
 
-  root 'libraries#show'
+  root "libraries#show"
 end
