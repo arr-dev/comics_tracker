@@ -10,5 +10,5 @@
       %ul.issues.list-group
         -# TODO: collection is prety bad
         = render partial: 'issues/issue_item', collection: @issues[volume.id], as: :issue if with_issues
-        = paginate @issues[volume.id], param_name: 'issues_page' if with_issues
+        = paginate @issues[volume.id], param_name: "issues_page_#{volume.id}" if with_issues
 = paginate @volumes
