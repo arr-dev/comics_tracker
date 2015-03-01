@@ -4,12 +4,17 @@ class LibrariesController < ApplicationController
   # GET /libraries/1
   # GET /libraries/1.json
   def show
-    @volumes = current_user.volumes.includes(:issues)
+    @volumes = current_user.volumes.order(:id).page(params[:page])
+    @issues = @volumes.each_with_object({}) do |volume, memo|
+      memo[volume.id] = Issue.where(volume: volume).includes(:volume).page(params[:issues_page])
+    end
   end
 
   def unread
-    @issues = Issue.unread(current_user).includes(:volume)
-    @volumes = Volume.where(id: @issues.map(&:volume_id).uniq)
+    @volumes = Volume.unread(current_user).order(:id).page(params[:page])
+    @issues = @volumes.each_with_object({}) do |volume, memo|
+      memo[volume.id] = Issue.unread(current_user).where(volume: volume).includes(:volume).page(params[:issues_page])
+    end
 
     render action: 'show'
   end
