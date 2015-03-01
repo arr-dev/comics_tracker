@@ -62,5 +62,6 @@ group :development, :test do
   gem 'bullet'
 
   gem 'annotate', '~> 2.6.5'
+  gem 'rack-mini-profiler'
 end
 

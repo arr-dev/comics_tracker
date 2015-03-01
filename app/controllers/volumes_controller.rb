@@ -1,6 +1,6 @@
 class VolumesController < ApplicationController
   def index
-    @volumes = Volume.all
+    @volumes = Volume.order(:id).page(params[:page])
   end
 
   def show
