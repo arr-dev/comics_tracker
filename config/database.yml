@@ -2,13 +2,13 @@ default: &default
   adapter: postgresql
   pool: 5
   encoding: unicode
-  username: comics
-  password: password
-  host: localhost
 
 development:
   <<: *default
   database: comics_development
+  username: comics
+  password: password
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -16,6 +16,7 @@ development:
 test:
   <<: *default
   database: comics_test
+  username: postgres
 
 production:
   adapter: postgresql
