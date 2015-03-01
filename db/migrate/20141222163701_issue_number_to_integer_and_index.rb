@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/LineLength
 class IssueNumberToIntegerAndIndex < ActiveRecord::Migration
   def up
     change_column :issues, :issue_number, 'integer USING CAST("issue_number" AS integer)'

@@ -23,7 +23,7 @@ class Library < ActiveRecord::Base
 
   validates :user, :volume, presence: true
 
-  enum status: [ :active, :archived ]
+  enum status: [:active, :archived]
 
   def next_read(issue)
     if last_read.nil? || issue.issue_number > last_read

@@ -16,10 +16,14 @@
 #
 
 class Readlist < ActiveRecord::Base
-  scope :for_volume, -> (volume) { where(issues: { volume_id: volume }).joins(:issue).order(Issue.newest.order_values) }
-
   belongs_to :issue
   belongs_to :user
 
   validates :issue, :user, presence: true
+
+  def self.for_volume(volume)
+    where(issues: { volume_id: volume })
+      .joins(:issue)
+      .order(Issue.newest.order_values)
+  end
 end

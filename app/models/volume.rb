@@ -26,13 +26,13 @@ class Volume < ActiveRecord::Base
 
   validates :comicvineid, :name, :start_year, :image_url, :publisher_name, presence: true
 
-  enum status: [ :active, :archived ]
+  enum status: [:active, :archived]
 
   def self.unread(user)
     lib_table = Library.arel_table
 
     conditions =
-      Issue.arel_table[:issue_number]
+        Issue.arel_table[:issue_number]
         .gt(lib_table[:last_read])
         .or(lib_table[:last_read].eq(nil))
         .and(lib_table[:user_id].eq(user.id))
@@ -44,14 +44,14 @@ class Volume < ActiveRecord::Base
 
   def self.create_from_api(results)
     create!(
-      comicvineid: results['id'],
-      name: results['name'],
-      start_year: results['start_year'],
-      api_detail_url: results['api_detail_url'],
-      site_detail_url: results['site_detail_url'],
-      image_url: 'http://static.comicvine.com' + results['image']['medium_url'],
-      publisher_name: results['publisher']['name'],
-      description: results['description'],
+      comicvineid: results["id"],
+      name: results["name"],
+      start_year: results["start_year"],
+      api_detail_url: results["api_detail_url"],
+      site_detail_url: results["site_detail_url"],
+      image_url: "http://static.comicvine.com" + results["image"]["medium_url"],
+      publisher_name: results["publisher"]["name"],
+      description: results["description"],
     )
   end
 end

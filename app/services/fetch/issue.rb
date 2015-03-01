@@ -3,7 +3,7 @@ module Fetch
     def call
       return true if ::Issue.where(comicvineid: @id).exists?
 
-      ::Issue.create_from_api(response['results'])
+      ::Issue.create_from_api(response["results"])
     end
 
     def url

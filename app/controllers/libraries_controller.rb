@@ -6,17 +6,22 @@ class LibrariesController < ApplicationController
   def show
     @volumes = current_user.volumes.order(:id).page(params[:page])
     @issues = @volumes.each_with_object({}) do |volume, memo|
-      memo[volume.id] = Issue.where(volume: volume).includes(:volume).page(params["issues_page_#{volume.id}"])
+      memo[volume.id] = Issue.where(volume: volume)
+                        .includes(:volume)
+                        .page(params["issues_page_#{volume.id}"])
     end
   end
 
   def unread
     @volumes = Volume.unread(current_user).order(:id).page(params[:page])
     @issues = @volumes.each_with_object({}) do |volume, memo|
-      memo[volume.id] = Issue.unread(current_user).where(volume: volume).includes(:volume).page(params["issues_page_#{volume.id}"])
+      memo[volume.id] = Issue.unread(current_user)
+                        .where(volume: volume)
+                        .includes(:volume)
+                        .page(params["issues_page_#{volume.id}"])
     end
 
-    render action: 'show'
+    render action: "show"
   end
 
   def create
@@ -36,8 +41,9 @@ class LibrariesController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def library_params
-      params.permit(:volume)
-    end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def library_params
+    params.permit(:volume)
+  end
 end

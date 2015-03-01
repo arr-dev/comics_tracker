@@ -6,7 +6,7 @@ if Rails.env.development? || Rails.env.test?
     task.options = ["--display-cop-names"]
   end
 
-  task precommit: %w(rubocop brakeman:run bundler:audit)
+  task default: %w(rubocop brakeman:run bundler:audit)
 end
 
 Rails.application.load_tasks

@@ -30,14 +30,14 @@ module Fetch
     end
 
     def connection
-      @conn ||= Faraday.new(url: 'https://www.comicvine.com') do |faraday|
+      @conn ||= Faraday.new(url: "https://www.comicvine.com") do |faraday|
         faraday.response :logger
         faraday.adapter Faraday.default_adapter
       end
     end
 
     def raise_error(data)
-      raise "Response Error code: #{data['status_code']}" if data['status_code'] != 1
+      raise "Response Error code: #{data['status_code']}" if data["status_code"] != 1
     end
   end
 end

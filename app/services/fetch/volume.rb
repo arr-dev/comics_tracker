@@ -3,7 +3,7 @@ module Fetch
     def call
       return true if ::Volume.where(comicvineid: @id).exists?
 
-      ::Volume.create_from_api(response['results'])
+      ::Volume.create_from_api(response["results"])
 
       fetch_new_issues_for_volume
     end

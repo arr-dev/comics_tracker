@@ -25,7 +25,7 @@
 #
 
 class Issue < ActiveRecord::Base
-  default_scope -> { order(issue_number: :desc) }
+  default_scope { order(issue_number: :desc) }
   scope :newest, -> { order(issue_number: :desc) }
 
   has_many :readlists
@@ -33,13 +33,13 @@ class Issue < ActiveRecord::Base
 
   validates :comicvineid, :volume, :issue_number, :store_date, :image_url, presence: true
 
-  enum status: [ :active, :archived ]
+  enum status: [:active, :archived]
 
   def self.unread(user)
     lib_table = Library.arel_table
 
     conditions =
-      arel_table[:issue_number]
+        arel_table[:issue_number]
         .gt(lib_table[:last_read])
         .or(lib_table[:last_read].eq(nil))
         .and(lib_table[:user_id].eq(user.id))
@@ -48,21 +48,28 @@ class Issue < ActiveRecord::Base
       .joins(volume: :libraries)
   end
 
-  def self.create_from_api(results)
-    volume = Volume.find_by_comicvineid(results['volume']['id'])
+  def self.create_from_api(results) # rubocop:disable Metrics/AbcSize
+    validate_issue_number_input!(results)
 
-    raise "Issue number is: #{results['issue_number']} #{results['issue_number'].class}" if results['issue_number'].to_i.to_s != results['issue_number']
+    volume = Volume.find_by_comicvineid(results["volume"]["id"])
+
     create!(
-      comicvineid: results['id'],
+      comicvineid: results["id"],
       volume: volume,
-      name: results['name'],
-      issue_number: results['issue_number'],
-      store_date: results['store_date'],
-      cover_date: results['cover_date'],
-      api_detail_url: results['api_detail_url'],
-      site_detail_url: results['site_detail_url'],
-      image_url: 'http://static.comicvine.com' + results['image']['medium_url'],
-      description: results['description'],
+      name: results["name"],
+      issue_number: results["issue_number"],
+      store_date: results["store_date"],
+      cover_date: results["cover_date"],
+      api_detail_url: results["api_detail_url"],
+      site_detail_url: results["site_detail_url"],
+      image_url: "http://static.comicvine.com" + results["image"]["medium_url"],
+      description: results["description"],
     )
+  end
+
+  def self.validate_issue_number_input!(results)
+    if results["issue_number"].to_i.to_s != results["issue_number"]
+      raise "Issue number is: #{results['issue_number']} #{results['issue_number'].class}"
+    end
   end
 end

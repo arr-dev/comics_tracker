@@ -5,10 +5,10 @@ module Fetch
     end
 
     def call
-      response['results'].each do |result|
-        next if ::Issue.where(comicvineid: result['id']).exists?
+      response["results"].each do |result|
+        next if ::Issue.where(comicvineid: result["id"]).exists?
 
-        Fetch::Issue.new(result['id']).call
+        Fetch::Issue.new(result["id"]).call
       end
     end
 
@@ -19,7 +19,7 @@ module Fetch
     def params
       super.merge(
         filter: "volume:#{@volume_id}",
-        field_list: 'id'
+        field_list: "id"
       )
     end
   end

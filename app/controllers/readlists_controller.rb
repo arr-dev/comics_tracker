@@ -25,8 +25,9 @@ class ReadlistsController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def readlist_params
-      params.permit(:issue)
-    end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def readlist_params
+    params.permit(:issue)
+  end
 end
